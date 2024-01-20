@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 /// App level configuration variables
 class AppConfigs {
   /// The max allowed age duration for the http cache
@@ -7,7 +9,8 @@ class AppConfigs {
   /// cache should be force refreshed
   static const String dioCacheForceRefreshKey = 'dio_cache_force_refresh_key';
 
-  /// Base API URL
-  static const String apiBaseUrl =
-      'https://nutriapp-api-test-n2sjpazr4q-ew.a.run.app/';
+  // -- config.env keys --
+  // Auth token for accessing the API
+  static String apiBaseUrl = dotenv.env['API_BASE_URL']!;
+  static String authToken = dotenv.env['API_KEY']!;
 }

@@ -31,6 +31,7 @@ dependencies:
   equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.1.0
   flutter_riverpod: ^2.4.8
   freezed: ^2.4.5
   freezed_annotation: ^2.4.1
@@ -54,6 +55,9 @@ dev_dependencies:
   very_good_analysis: ^5.1.0
 
 flutter:
+  assets:
+    - config.env
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

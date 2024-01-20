@@ -33,8 +33,7 @@ class DioHttp {
         BaseOptions(
           baseUrl: AppConfigs.apiBaseUrl,
           headers: {
-            'Authorization':
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MDQxMjQwMTkwOTksImFjY2Vzc190b2tlbiI6IjYzZjg4MzQ1ODQ3OGM2YjE5MzE0OWEyNzlhOTRkMmI1ZTZlYjgwM2MzZGY0ZDFhNzk5NzIyMDhlNzczNmJiOTciLCJleHAiOjE3MDQxMjQwMjI2OTl9.xVsSuSehpTytygy4AhBzNKEoUH1GGTu4AnCtqeJ6x6A',
+            'Authorization': 'Bearer ${AppConfigs.authToken}',
           },
         ),
       )..interceptors.add(
