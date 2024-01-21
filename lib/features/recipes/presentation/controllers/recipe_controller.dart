@@ -32,8 +32,11 @@ class RecipesController<T> extends StateNotifier<BaseState<dynamic>> {
 
   final Ref ref;
 
-  RecipeSearchRepository get _recipeSearchRepository =>
-      ref.read(recipeSearchRepositoryProvider);
+  RecipeRepository get _recipeRepository =>
+      _dummyRecipeRepository; // TODO: uncomment: ref.read(recipeRepositoryProvider);
+
+  RecipeRepository get _dummyRecipeRepository =>
+      ref.read(dummyRecipeRepositoryProvider);
 
   // TODO: (extra) add 'getRecommendedRecipes' that reads from '/recommended' endpoint.
 
@@ -54,7 +57,7 @@ class RecipesController<T> extends StateNotifier<BaseState<dynamic>> {
   }) async {
     state = const BaseState<void>.loading();
 
-    final response = await _recipeSearchRepository.getRecipes(
+    final response = await _recipeRepository.getRecipes(
       query: query,
       from: from,
       to: to,
@@ -96,7 +99,7 @@ class RecipesController<T> extends StateNotifier<BaseState<dynamic>> {
   Future<void> getRecipeByUri(String uri) async {
     state = const BaseState<void>.loading();
 
-    final response = await _recipeSearchRepository.getRecipeByUri(uri: uri);
+    final response = await _recipeRepository.getRecipeByUri(uri: uri);
 
     state = response.fold(
       (success) {
@@ -111,7 +114,7 @@ class RecipesController<T> extends StateNotifier<BaseState<dynamic>> {
   Future<void> queryRecipes(String query) async {
     state = const BaseState<void>.loading();
 
-    final response = await _recipeSearchRepository.getRecipesByQuery(
+    final response = await _recipeRepository.getRecipesByQuery(
       query: RecipeQueryBody(query),
     );
 

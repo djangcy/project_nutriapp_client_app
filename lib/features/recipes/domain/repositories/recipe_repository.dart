@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nutrition_app/core/core.dart';
 import 'package:nutrition_app/features/recipes/recipes.dart';
 
-final recipeSearchRepositoryProvider = Provider<RecipeSearchRepository>((ref) {
-  return RecipeSearchRepository(RecipeSearchApiClient(DioHttp.dioHttpClient));
+final recipeRepositoryProvider = Provider<RecipeRepository>((ref) {
+  return RecipeRepository(RecipeSearchApiClient(DioHttp.dioHttpClient));
 });
 
-class RecipeSearchRepository {
-  const RecipeSearchRepository(this._recipeSearchApiClient);
+class RecipeRepository {
+  const RecipeRepository(this._recipeSearchApiClient);
 
   final RecipeSearchApiClient _recipeSearchApiClient;
 

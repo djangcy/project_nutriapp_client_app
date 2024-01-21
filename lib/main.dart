@@ -14,6 +14,10 @@ void main() {
   );
 }
 
+final _routerConfig = AppRouter().config(
+  navigatorObservers: () => [RouteObserver()],
+);
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -30,9 +34,7 @@ class MyApp extends StatelessWidget {
           selectionHandleColor: PrimaryColorScheme.light.onSurface,
         ),
       ),
-      routerConfig: AppRouter().config(
-        navigatorObservers: () => [RouteObserver()],
-      ),
+      routerConfig: _routerConfig,
     );
   }
 }

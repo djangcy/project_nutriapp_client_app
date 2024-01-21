@@ -66,6 +66,7 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
             width: double.infinity,
             child: Stack(
               children: [
+                // Header Image
                 Positioned(
                   top: 0,
                   right: 0,
@@ -76,6 +77,7 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
                     fit: BoxFit.cover,
                   ),
                 ),
+                // Header Buttons
                 Positioned(
                   top: 0,
                   left: 0,
