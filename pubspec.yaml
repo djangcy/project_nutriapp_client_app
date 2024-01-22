@@ -58,6 +58,12 @@ flutter:
   assets:
     - config.env
 
+  fonts:
+    - family: Lora
+      fonts:
+        - asset: assets/fonts/Lora/Lora-VariableFont_wght.ttf
+        - asset: assets/fonts/Lora/Lora-Italic-VariableFont_wght.ttf
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

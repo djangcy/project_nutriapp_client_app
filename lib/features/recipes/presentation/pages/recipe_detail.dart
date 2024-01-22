@@ -62,7 +62,7 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
       body: ListView(
         children: [
           SizedBox(
-            height: 180,
+            height: 240,
             width: double.infinity,
             child: Stack(
               children: [
