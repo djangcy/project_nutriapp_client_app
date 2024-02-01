@@ -32,11 +32,10 @@ class RecipesController<T> extends StateNotifier<BaseState<dynamic>> {
 
   final Ref ref;
 
-  RecipeRepository get _recipeRepository =>
-      _dummyRecipeRepository; // TODO: uncomment: ref.read(recipeRepositoryProvider);
+  // RecipeRepository get _recipeRepository =>
+  //     ref.read(dummyRecipeRepositoryProvider);
 
-  RecipeRepository get _dummyRecipeRepository =>
-      ref.read(dummyRecipeRepositoryProvider);
+  RecipeRepository get _recipeRepository => ref.read(recipeRepositoryProvider);
 
   // TODO: (extra) add 'getRecommendedRecipes' that reads from '/recommended' endpoint.
 
