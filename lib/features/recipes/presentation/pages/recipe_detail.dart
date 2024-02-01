@@ -174,13 +174,11 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
                     1 =>
                       // Health
                       RecipeTagsWidget(
-                        startColor: Colors.green,
                         values: recipe.healthLabels,
                       ),
                     2 =>
                       // Cautions
                       RecipeTagsWidget(
-                        startColor: Colors.orange,
                         values: recipe.cautions,
                       ),
                     _ => Container()
