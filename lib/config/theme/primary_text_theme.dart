@@ -60,17 +60,29 @@ class PrimaryTextTheme {
       fontWeight: FontWeight.w400,
       letterSpacing: 0.25,
     ),
+    bodySmall: TextStyle(
+      fontFamily: 'Lora',
+      fontSize: 12,
+      fontWeight: FontWeight.w400,
+      letterSpacing: 0.4,
+    ),
     labelLarge: TextStyle(
       fontFamily: 'Lora',
       fontSize: 14,
       fontWeight: FontWeight.w500,
       letterSpacing: 1.25,
     ),
-    bodySmall: TextStyle(
+    labelMedium: TextStyle(
       fontFamily: 'Lora',
       fontSize: 12,
+      fontWeight: FontWeight.w500,
+      letterSpacing: 0.9,
+    ),
+    labelSmall: TextStyle(
+      fontFamily: 'Lora',
+      fontSize: 8,
       fontWeight: FontWeight.w400,
-      letterSpacing: 0.4,
+      letterSpacing: 0.9,
     ),
   );
 }
