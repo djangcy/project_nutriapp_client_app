@@ -10,21 +10,21 @@ class ThemedIconButton extends StatelessWidget {
   const ThemedIconButton.onBackground({
     super.key,
     required this.iconData,
-    this.size = 18,
+    this.size = 22,
     this.onTap,
   }) : _buttonStyle = _ButtonStyle.onBackground;
 
   const ThemedIconButton.background({
     super.key,
     required this.iconData,
-    this.size = 18,
+    this.size = 22,
     this.onTap,
   }) : _buttonStyle = _ButtonStyle.background;
 
   const ThemedIconButton.fill({
     super.key,
     required this.iconData,
-    this.size = 18,
+    this.size = 22,
     this.onTap,
   }) : _buttonStyle = _ButtonStyle.fill;
 
@@ -38,13 +38,13 @@ class ThemedIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool outlined = false;
-    Color color = Theme.of(context).colorScheme.background;
-    final Color outlinedColor = Theme.of(context).colorScheme.onBackground;
+    Color color = Theme.of(context).colorScheme.onBackground;
+    // final Color outlinedColor = Theme.of(context).colorScheme.onBackground;
 
     switch (_buttonStyle) {
       case _ButtonStyle.fill:
         outlined = true;
-        color = Theme.of(context).colorScheme.background;
+        color = Theme.of(context).colorScheme.onBackground;
       case _ButtonStyle.background:
         outlined = false;
         color = Theme.of(context).colorScheme.background;
@@ -60,8 +60,8 @@ class ThemedIconButton extends StatelessWidget {
         decoration: !outlined
             ? null
             : BoxDecoration(
-                shape: BoxShape.circle,
-                color: outlinedColor.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).colorScheme.background,
               ),
         child: Icon(
           iconData,

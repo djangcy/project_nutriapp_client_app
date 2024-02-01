@@ -5,4 +5,5 @@ export 'primary_app_bar.dart';
 export 'primary_full_search_bar.dart';
 export 'recipe_grid_view.dart';
 export 'recipe_info_block.dart';
+export 'tab_picker_widget.dart';
 export 'themed_icon_button.dart';

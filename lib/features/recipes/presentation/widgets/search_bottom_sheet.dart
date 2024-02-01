@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nutrition_app/config/config.dart';
 import 'package:nutrition_app/core/widgets/widgets.dart';
 import 'package:nutrition_app/features/recipes/recipes.dart';
 
@@ -45,17 +44,7 @@ class _SearchBottomSheetState extends ConsumerState<SearchBottomSheet> {
             RecipeGridView(
               children: recipeList.results
                   .map(
-                    (e) => RecipeInfoBlock(
-                      recipeName: e.label,
-                      cookingTimeText:
-                          e.totalTime <= 0 ? '-' : e.servings.toString(),
-                      servingsText:
-                          e.servings <= 0 ? '-' : e.servings.toString(),
-                      imageUrl: e.image,
-                      onTap: () => context.pushRoute(
-                        RecipeDetailRoute(recipeUrl: e.uri),
-                      ),
-                    ),
+                    (e) => RecipeInfoBlock.fromRecipe(recipe: e),
                   )
                   .toList(),
             ),

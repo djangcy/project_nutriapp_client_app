@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nutrition_app/config/config.dart';
 import 'package:nutrition_app/core/core.dart';
 import 'package:nutrition_app/features/recipes/recipes.dart';
+import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
@@ -21,11 +22,13 @@ class RecipeDetailPage extends ConsumerStatefulWidget {
 }
 
 class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
+  late int _tabIndex = 0;
+
   Future<void> _launchUrl(String url) async {
     try {
       final uri = Uri.parse(url);
 
-      await launchUrl(uri);
+      await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
     } on FormatException catch (e) {
       Logger.warning(
         'Invalid recipeUrl Url: '
@@ -39,6 +42,8 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
   @override
   void initState() {
     super.initState();
+
+    _tabIndex = 0;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(recipeByUriController.notifier).getRecipeByUri(widget.recipeUrl);
@@ -87,7 +92,7 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
                     child: Row(
                       children: [
                         ThemedIconButton.fill(
-                          iconData: Icons.close,
+                          iconData: Icons.arrow_back_rounded,
                           onTap: () => context.popRoute(),
                         ),
                         const Spacer(),
@@ -110,136 +115,76 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                // Title Text
+                AutoSizeText(
+                  recipe.label,
+                  maxLines: 2,
+                  presetFontSizes: const [24, 18],
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                // Recipe Info
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 8,
                   children: [
-                    AutoSizeText(
-                      recipe.label,
-                      maxLines: 2,
-                      style: Theme.of(context).textTheme.titleLarge,
+                    RecipeInfoPip(
+                      text: '🔥 ${recipe.calories.toInt()} Kcal',
                     ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.dinner_dining_rounded,
-                          size: 18,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${recipe.servings} servings',
-                          style: Theme.of(context).textTheme.labelMedium,
-                        ),
-                        const SizedBox(width: 4),
-                        const Icon(
-                          Icons.access_time_rounded,
-                          size: 18,
-                        ),
-                        const SizedBox(width: 4),
-                        Visibility(
-                          visible: recipe.totalTime > 1,
-                          child: Text(
-                            '${recipe.totalTime} mins',
-                            style: Theme.of(context).textTheme.labelMedium,
-                          ),
-                        ),
-                      ],
+                    RecipeInfoPip(
+                      text: '⏰ ${recipe.totalTime.toInt()} Mins',
+                    ),
+                    RecipeInfoPip(
+                      text: '🍽 ${recipe.servings} Servings',
                     ),
                   ],
                 ),
                 const SizedBox(height: 16),
+                // Source Link
                 InkWell(
                   onTap: () => _launchUrl(recipe.recipeUrl),
                   child: Text(
-                    'View Original',
+                    'Original Recipe',
                     style: Theme.of(context)
                         .textTheme
-                        .bodySmall
-                        ?.apply(color: Colors.blue),
+                        .titleSmall
+                        ?.copyWith(color: Colors.blue),
                   ),
                 ),
                 const SizedBox(height: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Cautions',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Wrap(
-                      children: [
-                        Text(
-                          recipe.cautions.join(', '),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
-                  ],
+                // Tabs
+                RecipeTabsWidget(
+                  onChanged: (index) => setState(() {
+                    _tabIndex = index;
+                  }),
                 ),
-                const SizedBox(height: 16),
-                // TODO: (EXTRA) nutritional information (formatted as label, if possible)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Ingredients',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Wrap(
-                      children: [
-                        ...recipe.ingredients.map(
-                          (e) {
-                            return Text(
-                              e.text,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Instructions',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Wrap(
-                      children: [
-                        Text(
-                          recipe.ingredientLines.join('\n'),
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                // TODO: create separate widget (recipe carousel)
-                // TODO: query similar recipes based on input uri/recipe?
-                Column(
-                  children: [
-                    const NavigationHeader(text: 'Similar Recipes'),
-                    SizedBox(
-                      width: double.infinity,
-                      child: RecipeGridView(
-                        children: [
-                          ...List.generate(
-                            5,
-                            (index) {
-                              return RecipeInfoBlock.fromRecipe(
-                                recipe: recipe,
-                                onTap: () => context.pushRoute(
-                                  RecipeDetailRoute(recipeUrl: recipe.uri),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+                // Tab Contents
+                Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: switch (_tabIndex) {
+                    0 =>
+                      // Ingredients
+                      ReadMoreText(
+                        recipe.ingredientLines.join('\n'),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                    ),
-                  ],
+                    1 =>
+                      // Health
+                      RecipeTagsWidget(
+                        startColor: Colors.green,
+                        values: recipe.healthLabels,
+                      ),
+                    2 =>
+                      // Cautions
+                      RecipeTagsWidget(
+                        startColor: Colors.orange,
+                        values: recipe.cautions,
+                      ),
+                    _ => Container()
+                  },
                 ),
               ],
             ),
