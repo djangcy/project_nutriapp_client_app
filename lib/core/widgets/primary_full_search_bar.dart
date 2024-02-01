@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multiline_search_bar/multiline_search_bar.dart';
 
 class PrimaryFullSearchBar extends StatelessWidget {
   const PrimaryFullSearchBar({
@@ -25,10 +26,11 @@ class PrimaryFullSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SearchBar(
+    return MultilineSearchBar(
       controller: controller,
       focusNode: focusNode,
       hintText: hintText,
+      maxLines: 4,
       hintStyle: MaterialStateProperty.all(
         TextStyle(
           fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
