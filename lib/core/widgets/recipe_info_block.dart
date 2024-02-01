@@ -70,13 +70,16 @@ class RecipeInfoBlock extends StatelessWidget {
                       ),
               ),
               const SizedBox(height: 4),
-              AutoSizeText(
-                recipeName,
-                style: Theme.of(context).textTheme.titleSmall,
-                minFontSize: 10,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.clip,
+              SizedBox(
+                height: 14,
+                child: AutoSizeText(
+                  recipeName,
+                  style: Theme.of(context).textTheme.titleSmall,
+                  presetFontSizes: const [12, 10, 8],
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               const SizedBox(height: 4),
               Padding(
