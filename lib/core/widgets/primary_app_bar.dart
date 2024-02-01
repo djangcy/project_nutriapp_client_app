@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 
-class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
+class PrimaryAppBar extends StatefulWidget implements PreferredSizeWidget {
   const PrimaryAppBar({super.key});
 
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  State<PrimaryAppBar> createState() => _PrimaryAppBarState();
+}
+
+class _PrimaryAppBarState extends State<PrimaryAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -10,8 +18,4 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
-
-  @override
-  // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

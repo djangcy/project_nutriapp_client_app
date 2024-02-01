@@ -63,14 +63,11 @@ class _SearchBarHeaderState extends ConsumerState<QuerySearchBarHeader> {
             onSubmitted: onSearch,
           ),
         ),
-        const SizedBox(height: 8),
-        TabPickerWidget(
-          tabs: const [
-            TabData(title: 'Dinner'),
-            TabData(title: 'Lunch'),
-            TabData(title: 'Breakfast'),
-            TabData(title: 'Snack'),
-          ],
+        const SizedBox(height: 24),
+        Container(
+          width: double.infinity,
+          height: 2,
+          color: Colors.black,
         ),
       ],
     );

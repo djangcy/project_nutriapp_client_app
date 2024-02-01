@@ -480,6 +480,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  multiline_search_bar:
+    dependency: "direct main"
+    description:
+      path: "packages/multiline_search_bar"
+      relative: true
+    source: path
+    version: "0.0.1"
   node_preamble:
     dependency: transitive
     description:
@@ -608,6 +615,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
+  readmore:
+    dependency: "direct main"
+    description:
+      name: readmore
+      sha256: "99c2483202f7c7e98c50834d72be2b119aefecf4497ca1960ae9d5f418eb1481"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   retrofit:
     dependency: "direct main"
     description:
