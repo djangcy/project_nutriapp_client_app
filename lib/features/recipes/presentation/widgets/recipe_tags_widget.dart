@@ -18,8 +18,8 @@ class RecipeTagsWidget extends StatefulWidget {
 }
 
 class _RecipeTagsWidgetState extends State<RecipeTagsWidget> {
-  late Color _startColor = Colors.white;
-  late Color _endColor = Colors.white;
+  Color _startColor = Colors.white;
+  Color _endColor = Colors.white;
 
   @override
   void initState() {
@@ -45,11 +45,13 @@ class _RecipeTagsWidgetState extends State<RecipeTagsWidget> {
           .map<Widget>(
             (e) => RecipeTagPip(
               text: e.value,
-              color: Color.lerp(
-                _startColor,
-                _endColor,
-                e.key / (widget.values.length - 1),
-              ),
+              color: widget.values.length <= 1
+                  ? _startColor
+                  : Color.lerp(
+                      _startColor,
+                      _endColor,
+                      e.key / (widget.values.length - 1),
+                    ),
             ),
           )
           .toList(),
