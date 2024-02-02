@@ -1,16 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nutrition_app/bootstrap.dart';
 import 'package:nutrition_app/config/config.dart';
 
 void main() {
   bootstrap(
-    () => ProviderScope(
-      observers: [ProviderLogger()],
-      child: const MyApp(),
-    ),
+    MyApp.new,
   );
 }
 
@@ -36,21 +30,5 @@ class MyApp extends StatelessWidget {
       ),
       routerConfig: _routerConfig,
     );
-  }
-}
-
-class ProviderLogger extends ProviderObserver {
-  @override
-  void didUpdateProvider(
-    ProviderBase<dynamic> provider,
-    Object? previousValue,
-    Object? newValue,
-    ProviderContainer container,
-  ) {
-    log('''
-{
-  "provider": "${provider.name ?? provider.runtimeType}",
-  "newValue": "$newValue"
-}''');
   }
 }
