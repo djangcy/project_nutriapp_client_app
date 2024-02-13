@@ -113,7 +113,7 @@ class _$BaseInitialImpl<T> implements BaseInitial<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$BaseInitialImpl<T>);
   }
@@ -227,7 +227,7 @@ class _$BaseLoadingImpl<T> implements BaseLoading<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$BaseLoadingImpl<T>);
   }
@@ -359,7 +359,7 @@ class _$BaseErrorImpl<T> implements BaseError<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BaseErrorImpl<T> &&
@@ -504,7 +504,7 @@ class _$BaseSuccessImpl<T> implements BaseSuccess<T> {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BaseSuccessImpl<T> &&

@@ -3,17 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nutrition_app/core/core.dart';
 import 'package:nutrition_app/features/recipes/recipes.dart';
 
-final searchRecipesController = StateNotifierProvider.autoDispose<
-    RecipesController<PaginatedResponse<RecipeEntity>>, BaseState<dynamic>>(
-  _recipesController,
-);
-
-final queryRecipesController = StateNotifierProvider.autoDispose<
-    RecipesController<PaginatedResponse<RecipeEntity>>, BaseState<dynamic>>(
-  _recipesController,
-);
-
-final recipeByUriController = StateNotifierProvider.autoDispose<
+final recipesController = StateNotifierProvider.autoDispose<
     RecipesController<PaginatedResponse<RecipeEntity>>, BaseState<dynamic>>(
   _recipesController,
 );
@@ -102,7 +92,7 @@ class RecipesController<T> extends StateNotifier<BaseState<dynamic>> {
 
     state = response.fold(
       (success) {
-        ref.read(recipeByUriProvider.notifier).state = success;
+        ref.read(currentRecipeProvider.notifier).state = success;
 
         return BaseState<RecipeModel>.success(data: success);
       },

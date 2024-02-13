@@ -18,7 +18,7 @@ class _SearchBarHeaderState extends ConsumerState<QuerySearchBarHeader> {
   late bool _showClear;
 
   Future<void> onSearch(String query) async {
-    await ref.read(queryRecipesController.notifier).queryRecipes(query);
+    await ref.read(recipesController.notifier).queryRecipes(query);
   }
 
   void _onTextControllerChanged() {

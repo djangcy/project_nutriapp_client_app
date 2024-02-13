@@ -1,8 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'recipe_serializers.dart';
+
 part 'recipe.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class RecipeModel {
   RecipeModel({
     required this.uri,
@@ -28,6 +30,8 @@ class RecipeModel {
   factory RecipeModel.fromJson(Map<String, dynamic> json) =>
       _$RecipeModelFromJson(json);
 
+  Map<String, dynamic> toJson() => _$RecipeModelToJson(this);
+
   final String uri;
   final String label;
   final String image;
@@ -38,6 +42,7 @@ class RecipeModel {
   final List<String> healthLabels;
   final List<String> cautions;
   final List<String> ingredientLines;
+  @IngredientsSerializer()
   final List<Ingredient> ingredients;
   final double calories;
   final double totalWeight;
@@ -48,7 +53,7 @@ class RecipeModel {
   final Map<String, Nutrient> totalNutrients;
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Ingredient {
   Ingredient({
     required this.text,
@@ -76,7 +81,7 @@ class Ingredient {
   Map<String, dynamic> toJson() => _$IngredientToJson(this);
 }
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Nutrient {
   Nutrient({
     required this.label,

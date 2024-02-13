@@ -24,9 +24,8 @@ RecipeModel _$RecipeModelFromJson(Map<String, dynamic> json) => RecipeModel(
       ingredientLines: (json['ingredientLines'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      ingredients: (json['ingredients'] as List<dynamic>)
-          .map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      ingredients:
+          const IngredientsSerializer().fromJson(json['ingredients'] as List),
       calories: (json['calories'] as num).toDouble(),
       totalWeight: (json['totalWeight'] as num).toDouble(),
       totalTime: (json['totalTime'] as num).toDouble(),
@@ -55,14 +54,15 @@ Map<String, dynamic> _$RecipeModelToJson(RecipeModel instance) =>
       'healthLabels': instance.healthLabels,
       'cautions': instance.cautions,
       'ingredientLines': instance.ingredientLines,
-      'ingredients': instance.ingredients,
+      'ingredients': const IngredientsSerializer().toJson(instance.ingredients),
       'calories': instance.calories,
       'totalWeight': instance.totalWeight,
       'totalTime': instance.totalTime,
       'cuisineType': instance.cuisineType,
       'mealType': instance.mealType,
       'dishType': instance.dishType,
-      'totalNutrients': instance.totalNutrients,
+      'totalNutrients':
+          instance.totalNutrients.map((k, e) => MapEntry(k, e.toJson())),
     };
 
 Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(

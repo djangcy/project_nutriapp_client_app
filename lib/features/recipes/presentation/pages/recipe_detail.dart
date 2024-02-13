@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nutrition_app/config/config.dart';
 import 'package:nutrition_app/core/core.dart';
+import 'package:nutrition_app/features/profile/presentation/controllers/controllers.dart';
 import 'package:nutrition_app/features/recipes/recipes.dart';
 import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../profile/presentation/providers/providers.dart';
 
 @RoutePage()
 class RecipeDetailPage extends ConsumerStatefulWidget {
@@ -39,15 +42,28 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
     }
   }
 
+  void _loadLikedRecipe() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .read(likedRecipesController.notifier)
+          .getLikedRecipeByUri(widget.recipeUrl);
+    });
+  }
+
+  void _loadRecipe() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(recipesController.notifier).getRecipeByUri(widget.recipeUrl);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
 
     _tabIndex = 0;
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(recipeByUriController.notifier).getRecipeByUri(widget.recipeUrl);
-    });
+    _loadRecipe();
+    _loadLikedRecipe();
   }
 
   Widget _recipeNotFoundView() {
@@ -57,7 +73,8 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
   }
 
   Widget _successView() {
-    final recipe = ref.watch(recipeByUriProvider);
+    final recipe = ref.watch(currentRecipeProvider);
+    final likedRecipe = ref.watch(likedRecipeByUriProvider);
 
     if (recipe == null) {
       return _recipeNotFoundView();
@@ -96,10 +113,27 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
                           onTap: () => context.popRoute(),
                         ),
                         const Spacer(),
-                        ThemedIconButton.fill(
-                          iconData: Icons.favorite_outline_rounded,
-                          onTap: () {
-                            // TODO: (EXTRA) add to favourites in profile
+                        Builder(
+                          builder: (context) {
+                            final bool isLiked = likedRecipe != null;
+
+                            return ThemedIconButton.fill(
+                              iconData: isLiked
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_outline_rounded,
+                              onTap: () {
+                                if (isLiked) {
+                                  ref
+                                      .read(likedRecipesController.notifier)
+                                      .removeLikedRecipe(recipe.uri);
+                                } else {
+                                  ref
+                                      .read(likedRecipesController.notifier)
+                                      .addLikedRecipe(recipe);
+                                }
+                                _loadLikedRecipe();
+                              },
+                            );
                           },
                         ),
                       ],
@@ -131,14 +165,17 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
                   spacing: 12,
                   runSpacing: 8,
                   children: [
-                    RecipeInfoPip(
+                    RecipeInfoPip.large(
                       text: '🔥 ${recipe.calories.toInt()} Kcal',
+                      color: Theme.of(context).colorScheme.surface,
                     ),
-                    RecipeInfoPip(
+                    RecipeInfoPip.large(
                       text: '⏰ ${recipe.totalTime.toInt()} Mins',
+                      color: Theme.of(context).colorScheme.surface,
                     ),
-                    RecipeInfoPip(
+                    RecipeInfoPip.large(
                       text: '🍽 ${recipe.servings} Servings',
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ],
                 ),
@@ -195,7 +232,7 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final recipeByUriState = ref.watch(recipeByUriController);
+    final recipeByUriState = ref.watch(recipesController);
 
     return recipeByUriState.map(
       initial: (_) => const SizedBox.shrink(),

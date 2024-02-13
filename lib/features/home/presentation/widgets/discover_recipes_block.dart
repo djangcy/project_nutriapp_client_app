@@ -18,7 +18,7 @@ class _DiscoverRecipesBlockState extends ConsumerState<DiscoverRecipesBlock> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(searchRecipesController.notifier).searchRecipes(
+      ref.read(recipesController.notifier).searchRecipes(
             query: 'discover',
           );
     });
@@ -54,7 +54,7 @@ class _DiscoverRecipesBlockState extends ConsumerState<DiscoverRecipesBlock> {
 
   @override
   Widget build(BuildContext context) {
-    final searchRecipesState = ref.watch(searchRecipesController);
+    final searchRecipesState = ref.watch(recipesController);
 
     return searchRecipesState.map(
       initial: (_) => const SizedBox.shrink(),

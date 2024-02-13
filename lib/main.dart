@@ -4,7 +4,7 @@ import 'package:nutrition_app/config/config.dart';
 
 void main() {
   bootstrap(
-    MyApp.new,
+    () => const MyApp(),
   );
 }
 

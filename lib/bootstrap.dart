@@ -32,8 +32,6 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
           child: await builder(),
         ),
       );
-
-      runApp(await builder());
     },
     (error, stack) => debugPrint('Error | $error\nStack | $stack'),
   );
