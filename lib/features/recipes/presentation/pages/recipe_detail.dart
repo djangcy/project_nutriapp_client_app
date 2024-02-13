@@ -97,7 +97,7 @@ class _RecipeDetailPageState extends ConsumerState<RecipeDetailPage> {
                   child: Image.network(
                     recipe.image,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
+                    errorBuilder: (context, error, _) {
                       return const Center(child: Text('Error Loading Image'));
                     },
                   ),

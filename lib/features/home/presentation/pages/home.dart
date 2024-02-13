@@ -19,21 +19,7 @@ class HomePage extends StatelessWidget {
               height: 60,
               child: Row(
                 children: [
-                  RichText(
-                    text: TextSpan(
-                      text: 'Good Evening', // TODO: Get from l10n, time data
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleSmall
-                          ?.copyWith(fontWeight: FontWeight.w400),
-                      children: [
-                        TextSpan(
-                          text: '\nDana', // TODO: Get from data
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ],
-                    ),
-                  ),
+                  const GreetingTitleWidget(),
                   const Spacer(),
                   IconButton(
                     icon: const Icon(
@@ -47,8 +33,7 @@ class HomePage extends StatelessWidget {
             ),
             PrimaryFullSearchBar(
               focusNode: FocusNode(),
-              hintText:
-                  'What can I make for dinner in 20 minutes?', // TODO: Get from l10n
+              hintText: 'What can I make for dinner in 20 minutes?',
               onTap: () {
                 // Removes focus after tapping
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -57,7 +42,6 @@ class HomePage extends StatelessWidget {
                     focus.focusedChild?.unfocus();
                   }
                 });
-                // TODO: Create a bottom sheet that covers the screen, for searching. Use hero for search bar
                 SearchBottomSheet.show(context);
               },
             ),
