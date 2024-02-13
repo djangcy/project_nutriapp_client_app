@@ -30,7 +30,7 @@ class _DiscoverRecipesBlockState extends ConsumerState<DiscoverRecipesBlock> {
 
     return Column(
       children: [
-        const NavigationHeader(
+        const NavigationHeader.title(
           text: 'Discover Recipes', // TODO: Get from l10n
         ),
         SizedBox(
