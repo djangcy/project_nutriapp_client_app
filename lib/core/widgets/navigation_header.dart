@@ -8,6 +8,12 @@ class NavigationHeader extends StatelessWidget {
     this.onTap,
   });
 
+  const NavigationHeader.title({
+    super.key,
+    required this.text,
+    this.onTap,
+  }) : trailing = const SizedBox.shrink();
+
   final String text;
   final Widget trailing;
   final void Function()? onTap;
