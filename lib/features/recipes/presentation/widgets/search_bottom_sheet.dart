@@ -32,6 +32,38 @@ class SearchBottomSheet extends ConsumerStatefulWidget {
 }
 
 class _SearchBottomSheetState extends ConsumerState<SearchBottomSheet> {
+  Widget _errorView() {
+    const String text =
+        "It looks like we couldn't find what you were looking for 😢\n"
+        'Make sure that your search follows these rules:'
+        '\n\t- Your search contains at least one ingredient,'
+        '\n\t- Your search is food-related'
+        '\n\nExample: What can I make for dinner using chicken?';
+
+    return Expanded(
+      child: Flex(
+        direction: Axis.vertical,
+        children: [
+          const Spacer(),
+          Expanded(
+            child: Padding(
+              padding: pagePadding,
+              child: Wrap(
+                children: [
+                  Text(
+                    text,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Spacer(flex: 3),
+        ],
+      ),
+    );
+  }
+
   Widget _successView() {
     final recipeList = ref.watch(queryRecipesProvider);
     return Expanded(
@@ -55,6 +87,19 @@ class _SearchBottomSheetState extends ConsumerState<SearchBottomSheet> {
     );
   }
 
+  Widget _loadingView() {
+    return const Expanded(
+      child: Flex(
+        direction: Axis.vertical,
+        children: [
+          Spacer(),
+          CircularProgressIndicator(),
+          Spacer(flex: 3),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final queryRecipesState = ref.watch(recipesController);
@@ -65,9 +110,9 @@ class _SearchBottomSheetState extends ConsumerState<SearchBottomSheet> {
         const QuerySearchBarHeader(),
         queryRecipesState.map(
           initial: (_) => const SizedBox.shrink(),
-          loading: (_) => const Center(child: CircularProgressIndicator()),
+          loading: (_) => _loadingView(),
           success: (success) => _successView(),
-          error: (_) => const ErrorView(),
+          error: (_) => _errorView(),
         ),
       ],
     );
