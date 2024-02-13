@@ -56,8 +56,8 @@ class PrimaryColorScheme {
     background: Color.fromARGB(255, 255, 255, 255),
     onBackground: Color.fromARGB(255, 42, 42, 42),
     surface: Color.fromARGB(255, 240, 240, 240),
-    onSurface: Colors.white,
-    surfaceVariant: Color(0xFFF2F2F2),
+    onSurface: Color(0xFF2B2B2B),
+    surfaceVariant: Color(0xFF899294),
     onSurfaceVariant: Color(0xFF2B2B2B),
     outline: Color(0xFF899294),
     onInverseSurface: Color.fromARGB(255, 211, 211, 211),
@@ -65,7 +65,7 @@ class PrimaryColorScheme {
     inversePrimary: Color.fromARGB(255, 202, 202, 202),
     shadow: Color.fromARGB(255, 228, 228, 228),
     surfaceTint: Color.fromARGB(255, 42, 42, 42),
-    outlineVariant: Color(0xFFF2F2F2),
+    outlineVariant: Color(0xFF2B2B2B),
     scrim: Color.fromARGB(255, 243, 243, 243),
   );
 }

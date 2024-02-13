@@ -8,13 +8,11 @@ class RecipeInfoTile extends StatelessWidget {
     required RecipeModel recipe,
     this.onTap,
   })  : recipeName = recipe.label,
-        imageUrl = recipe.image,
         caloriesText = '${recipe.calories.toInt()}',
         servingsText = '${recipe.servings}',
         cookingTimeText = '${recipe.totalTime.toInt()}';
 
   final String recipeName;
-  final String? imageUrl;
   final String caloriesText;
   final String servingsText;
   final String cookingTimeText;
@@ -30,14 +28,6 @@ class RecipeInfoTile extends StatelessWidget {
         height: 80,
         width: double.infinity,
         decoration: BoxDecoration(
-          image: imageUrl == null
-              ? null
-              : DecorationImage(
-                  image: NetworkImage(imageUrl!),
-                  fit: BoxFit.cover,
-                  opacity: 0.7,
-                  colorFilter: const ColorFilter.srgbToLinearGamma(),
-                ),
           color: Theme.of(context).colorScheme.surface,
         ),
         child: child,
@@ -74,24 +64,21 @@ class RecipeInfoTile extends StatelessWidget {
                   recipeName,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.background,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                 ),
                 Row(
                   children: [
                     RecipeInfoPip(
                       text: '🔥 $caloriesText',
-                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     const SizedBox(width: 12),
                     RecipeInfoPip(
                       text: '⏰ $cookingTimeText',
-                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     const SizedBox(width: 12),
                     RecipeInfoPip(
                       text: '🍽 $servingsText',
-                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ],
                 ),
