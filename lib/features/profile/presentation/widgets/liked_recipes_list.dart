@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nutrition_app/config/config.dart';
 import 'package:nutrition_app/core/core.dart';
 import 'package:nutrition_app/features/profile/profile.dart';
 
@@ -39,6 +40,9 @@ class _LikedRecipeListState extends ConsumerState<LikedRecipeList> {
             padding: const EdgeInsets.symmetric(vertical: 4),
             child: RecipeInfoTile.fromRecipe(
               recipe: likedRecipes[index],
+              onTap: () => context.pushRoute(
+                RecipeDetailRoute(recipeUrl: likedRecipes[index].uri),
+              ),
             ),
           );
         },
