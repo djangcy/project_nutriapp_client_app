@@ -35,9 +35,12 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  const Icon(
-                    Icons.account_circle,
-                    size: 28,
+                  IconButton(
+                    icon: const Icon(
+                      Icons.account_circle,
+                      size: 28,
+                    ),
+                    onPressed: () => context.router.push(const ProfileRoute()),
                   ),
                 ],
               ),

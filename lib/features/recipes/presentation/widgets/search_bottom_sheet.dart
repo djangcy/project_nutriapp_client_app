@@ -57,7 +57,7 @@ class _SearchBottomSheetState extends ConsumerState<SearchBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final queryRecipesState = ref.watch(queryRecipesController);
+    final queryRecipesState = ref.watch(recipesController);
 
     return Flex(
       direction: Axis.vertical,

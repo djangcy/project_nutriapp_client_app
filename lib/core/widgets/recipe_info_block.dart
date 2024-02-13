@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:nutrition_app/core/core.dart';
 import 'package:nutrition_app/features/recipes/recipes.dart';
 
 class RecipeInfoBlock extends StatelessWidget {
@@ -88,13 +89,13 @@ class RecipeInfoBlock extends StatelessWidget {
                   spacing: 12,
                   runSpacing: 8,
                   children: [
-                    _RecipeInfoPip(
+                    RecipeInfoPip.small(
                       text: '🔥 $caloriesText',
                     ),
-                    _RecipeInfoPip(
+                    RecipeInfoPip.small(
                       text: '⏰ $cookingTimeText',
                     ),
-                    _RecipeInfoPip(
+                    RecipeInfoPip.small(
                       text: '🍽 $servingsText',
                     ),
                   ],
@@ -104,39 +105,6 @@ class RecipeInfoBlock extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _RecipeInfoPip extends StatelessWidget {
-  const _RecipeInfoPip({
-    required this.text,
-  });
-
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 15,
-      width: 40,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            text,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 8,
-                  // color: Theme.of(context).colorScheme.,
-                ),
-          ),
-        ],
       ),
     );
   }

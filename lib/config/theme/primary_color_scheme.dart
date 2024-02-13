@@ -56,7 +56,7 @@ class PrimaryColorScheme {
     background: Color.fromARGB(255, 255, 255, 255),
     onBackground: Color.fromARGB(255, 42, 42, 42),
     surface: Color.fromARGB(255, 240, 240, 240),
-    onSurface: Color.fromARGB(255, 50, 50, 50),
+    onSurface: Colors.white,
     surfaceVariant: Color(0xFFF2F2F2),
     onSurfaceVariant: Color(0xFF2B2B2B),
     outline: Color(0xFF899294),
