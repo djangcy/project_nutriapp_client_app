@@ -2,7 +2,7 @@
 
 ---
 
-**Note**: The API is hosted on a Google Cloud Run instance and suffers from cold starts since it doesn't have resources allocated at all times.
+**Note**: The API is hosted on a Google Cloud Run instance and suffers from cold starts, so please be patient when first loading the site.
 
 **Note**: The Nutriapp mobile client was built with the intention of being an Android app and has been hosted as a web version ([Nutriapp Web](https://project-nutriapp.web.app/)) for easy accessibility for demonstration purposes. It is best experienced when accessed from a mobile device.
 
